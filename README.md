@@ -30,20 +30,25 @@ The project involves analyzing tweet data to determine the sentiment expressed i
 1. **Loading Data**:
     ```python
     import pandas as pd
+    import numpy as np
+    import re
+    from nltk.corpus import stopwords
+    from nltk.stem.porter import PorterStemmer
+    from sklearn.model_selection import train_test_split
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.metrics import accuracy_score
+
     data = pd.read_csv('tweets.csv')
     data.head()
     ```
 
 2. **Data Preprocessing**:
-   There are no null values.
-   The positive and negative tweets are equally distributed.
-   Replacing 4 with 1 in the target Column.
-    ```python
-    import nltk
-    from nltk.corpus import stopwords
-    from nltk.tokenize import word_tokenize
-    nltk.download('stopwords')
-    nltk.download('punkt')
+       1. There are no null values.
+       2. The positive and negative tweets are equally distributed.
+       3. Replacing 4 with 1 in the target Column.
+       4. Stemming: Reducing to key word.
+    
 
     stop_words = set(stopwords.words('english'))
 
@@ -59,10 +64,7 @@ The project involves analyzing tweet data to determine the sentiment expressed i
 
 4. **Sentiment Analysis**:
     ```python
-    from sklearn.model_selection import train_test_split
-    from sklearn.feature_extraction.text import CountVectorizer
-    from sklearn.naive_bayes import MultinomialNB
-    from sklearn.metrics import classification_report, accuracy_score
+    
 
     splitting data to training data and test data
     X_train,X_test,Y_train,Y_test=train_test_split(X, Y, test_size=0.2, stratify=Y, random_state=2)
